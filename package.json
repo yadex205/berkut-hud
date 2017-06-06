@@ -1,0 +1,20 @@
+{
+  "name": "berkut-hud",
+  "version": "0.0.0",
+  "description": "A fast search solution for performers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yadex205/berkut-hud.git"
+  },
+  "author": "Kanon Kakuno <yadex205@outlook.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yadex205/berkut-hud/issues"
+  },
+  "homepage": "https://github.com/yadex205/berkut-hud#readme",
+  "private": true
+}

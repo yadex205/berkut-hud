@@ -3,6 +3,7 @@ const plug        = require('gulp-load-plugins')()
 const browserSync = require('browser-sync').create()
 const Electron    = require('electron')
 const Pathname    = require('node-pathname')
+const rimraf      = require('rimraf')
 const runSequence = require('run-sequence')
 const spawn       = require('child_process').spawn
 
@@ -22,7 +23,11 @@ const JS_RENDER_DEST = DEST_ROOT.join('js')
 
 let electronProcess = null
 
-gulp.task('build', (done) => runSequence(['build:main', 'build:render'], done))
+gulp.task('clean', (done) => {
+  rimraf('{htdocs,lib}', done)
+})
+
+gulp.task('build', (done) => runSequence('clean', ['build:main', 'build:render'], done))
 
 gulp.task('build:main', () => {
   return gulp.src(JS_MAIN_SOURCES.toString())

@@ -2,11 +2,13 @@
   "name": "berkut-hud",
   "version": "0.0.0",
   "description": "A fast search solution for performers",
-  "main": "index.js",
+  "main": "lib/hud.js",
   "engine": {
     "node": ">=7.0"
   },
   "scripts": {
+    "build": "gulp build",
+    "start": "gulp live",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +21,23 @@
     "url": "https://github.com/yadex205/berkut-hud/issues"
   },
   "homepage": "https://github.com/yadex205/berkut-hud#readme",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "electron": "^1.6.10",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-ejs": "^3.0.1",
+    "gulp-filter": "^5.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "node-pathname": "^0.2.0"
+  }
 }

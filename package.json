@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "A fast search solution for performers",
   "main": "index.js",
+  "engine": {
+    "node": ">=7.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

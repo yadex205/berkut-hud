@@ -27,6 +27,7 @@
   "homepage": "https://github.com/yadex205/berkut-hud#readme",
   "private": true,
   "devDependencies": {
+    "bower": "^1.8.0",
     "browser-sync": "^2.18.12",
     "electron": "^1.6.10",
     "electron-rebuild": "^1.5.11",

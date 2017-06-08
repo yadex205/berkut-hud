@@ -14,22 +14,26 @@ const EJS_SOURCES       = SOURCE_ROOT.join('ejs/**/*.ejs')
 const SCSS_SOURCES      = SOURCE_ROOT.join('scss/**/*.scss')
 const JS_MAIN_SOURCES   = 'lib/**/*.js'
 const JS_RENDER_SOURCES = SOURCE_ROOT.join('js/**/*.js')
+const BOWER_ROOT        = new Pathname('bower_components')
 
 const DEST_ROOT      = new Pathname('htdocs')
 const EJS_DEST       = DEST_ROOT
 const SCSS_DEST      = DEST_ROOT.join('css')
 const JS_RENDER_DEST = DEST_ROOT.join('js')
+const VENDOR_DEST    = DEST_ROOT.join('vendor')
 
 let electronProcess = null
 
 gulp.task('clean', (done) => {
-  rimraf('{htdocs}', done)
+  rimraf('htdocs', done)
 })
 
 gulp.task('build', (done) => runSequence('clean', 'build:render', done))
 
 gulp.task('build:render', (done) => {
-  runSequence(['build:render:ejs', 'build:render:scss', 'build:render:js'], done)
+  runSequence([
+    'build:render:ejs', 'build:render:scss', 'build:render:js', 'build:render:bower'
+  ], done)
 })
 
 gulp.task('build:render:ejs', () => {
@@ -55,6 +59,23 @@ gulp.task('build:render:js', () => {
     .pipe(plug.concat('app.js'))
     .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.write()))
     .pipe(gulp.dest(JS_RENDER_DEST.toString()))
+})
+
+gulp.task('build:render:bower', (done) => {
+  runSequence(['build:render:bower:fontawesome',
+               'build:render:bower:vue'],
+              done)
+})
+
+gulp.task('build:render:bower:fontawesome', () => {
+  return gulp.src(BOWER_ROOT.join('font-awesome/{css,fonts}/**/*').toString())
+    .pipe(plug.filter(['**/*.woff2', '**/*.min.css']))
+    .pipe(gulp.dest(VENDOR_DEST.join('font-awesome').toString()))
+})
+
+gulp.task('build:render:bower:vue', () => {
+  return gulp.src(BOWER_ROOT.join('vue/dist/vue.js').toString())
+    .pipe(gulp.dest(VENDOR_DEST.join('vue').toString()))
 })
 
 gulp.task('live', (done) => {

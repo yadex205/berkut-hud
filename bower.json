@@ -1,0 +1,22 @@
+{
+  "name": "berkut-hud",
+  "description": "A fast search solution for performers",
+  "main": "lib/app.js",
+  "authors": [
+    "Kanon Kakuno <yadex205@outlook.jp>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/yadex205/berkut-hud",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^2.3.4",
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}

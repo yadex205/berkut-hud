@@ -1,0 +1,68 @@
+@import 'reset';
+@import 'variables';
+
+body {
+  background-color: $color-white;
+  color: $color-black;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.searchbar {
+  position: relative;
+  margin: 8px auto;
+  width: calc(100% - 18px);
+
+  border: 1px solid $color-gray;
+  border-radius: 18px;
+  box-shadow: inset 0 0 4px $color-gray;
+
+  .searchbar-icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+
+    font-color: $color-gray;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .searchbar-input {
+    margin-left: 36px;
+    width: calc(100% - 36px);
+    height: 32px;
+
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+
+    background-color: transparent;
+  }
+}
+
+.searchresult {
+  position: absolute;
+  top: 54px;
+  width: 100%;
+  height: calc(100% - 54px);
+  overflow: auto;
+
+  .searchresult-item {
+    padding: 6px 6px 6px 84px;
+    height: 48px;
+    background-color: $color-lightgray;
+    border-bottom: 1px solid $color-gray;
+
+    .thumbnail {
+      position: absolute;
+      left: 6px;
+      width: 72px;
+      height: 48px;
+      background-color: $color-white;
+    }
+
+    .pathname {
+      font-size: 12px;
+    }
+  }
+}

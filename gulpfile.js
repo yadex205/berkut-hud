@@ -57,7 +57,7 @@ gulp.task('build:render:js', () => {
   return gulp.src(JS_RENDER_SOURCES.toString())
     .pipe(plug.plumber())
     .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.init()))
-    .pipe(plug.uglify())
+    // .pipe(plug.uglify())
     .pipe(plug.concat('app.js'))
     .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.write()))
     .pipe(gulp.dest(JS_RENDER_DEST.toString()))

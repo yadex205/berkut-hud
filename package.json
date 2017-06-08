@@ -12,7 +12,7 @@
     "clean": "gulp clean",
     "live": "gulp live",
     "start": "pm2 start gulp --name=\"berkut-hud-gulp\" -- live",
-    "stop": "pm2 stop berkut-hud-gulp",
+    "stop": "pm2 delete berkut-hud-gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

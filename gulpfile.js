@@ -42,6 +42,7 @@ gulp.task('build:render:ejs', () => {
     .pipe(plug.plumber())
     .pipe(plug.ejs({}, {}, { ext: '.html' }))
     .pipe(gulp.dest(EJS_DEST.toString()))
+    .pipe(browserSync.stream())
 })
 
 gulp.task('build:render:scss', () => {
@@ -49,6 +50,7 @@ gulp.task('build:render:scss', () => {
     .pipe(plug.plumber())
     .pipe(plug.sass().on('error', plug.sass.logError))
     .pipe(gulp.dest(SCSS_DEST.toString()))
+    .pipe(browserSync.stream())
 })
 
 gulp.task('build:render:js', () => {
@@ -59,6 +61,7 @@ gulp.task('build:render:js', () => {
     .pipe(plug.concat('app.js'))
     .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.write()))
     .pipe(gulp.dest(JS_RENDER_DEST.toString()))
+    .pipe(browserSync.stream())
 })
 
 gulp.task('build:render:bower', (done) => {

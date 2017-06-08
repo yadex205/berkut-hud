@@ -2,12 +2,11 @@ const gulp        = require('gulp')
 const plug        = require('gulp-load-plugins')()
 const browserSync = require('browser-sync').create()
 const Electron    = require('electron')
+const packager    = require('electron-packager')
 const Pathname    = require('node-pathname')
 const rimraf      = require('rimraf')
 const runSequence = require('run-sequence')
 const spawn       = require('child_process').spawn
-
-const NODE_ENV = process.env.NODE_ENV
 
 const SOURCE_ROOT       = new Pathname('src')
 const EJS_SOURCES       = SOURCE_ROOT.join('ejs/**/*.ejs')
@@ -105,7 +104,11 @@ gulp.task('live:watch', (done) => {
 })
 
 gulp.task('live:electron:start', (done) => {
-  electronProcess = spawn(Electron, ['.', '--interactive'], { stdio: [0, 1, 2], env: process.env })
+  electronProcess = spawn(
+    Electron,
+    ['.', '--interactive'],
+    { stdio: [0, 1, 2], env: { LIVE_DEVELOPMENT: 'true' } }
+  )
   process.on('exit', () => electronProcess.kill())
   done()
 })
@@ -124,4 +127,23 @@ gulp.task('live:electron:stop', (done) => {
 
 gulp.task('live:electron:restart', (done) => {
   runSequence('live:electron:stop', 'live:electron:start', done)
+})
+
+gulp.task('release', (done) => {
+  packager({
+    // common
+    dir: '.',
+    arch: 'x64',
+    asar: true,
+    ignore: [/\.nvmrc/, /gulpfile\.js/, /bower.*/, /src/, /.+\.md/, /LICENSE/ ],
+    name: 'BERKUT HUD',
+    out: 'dist',
+    overwrite: true,
+    platform: 'darwin',
+
+    // macOS
+    appBundleId: 'info.yadex205.berkut.hud',
+    appCategoryType: 'public.app-category.productivity',
+    osxSign: true,
+  }, (_error, _appPaths) => done())
 })

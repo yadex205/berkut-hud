@@ -12,31 +12,21 @@ const NODE_ENV = process.env.NODE_ENV
 const SOURCE_ROOT       = new Pathname('src')
 const EJS_SOURCES       = SOURCE_ROOT.join('ejs/**/*.ejs')
 const SCSS_SOURCES      = SOURCE_ROOT.join('scss/**/*.scss')
-const JS_MAIN_SOURCES   = SOURCE_ROOT.join('js/main/**/*.js')
+const JS_MAIN_SOURCES   = 'lib/**/*.js'
 const JS_RENDER_SOURCES = SOURCE_ROOT.join('js/render/**/*.js')
 
 const DEST_ROOT      = new Pathname('htdocs')
 const EJS_DEST       = DEST_ROOT
 const SCSS_DEST      = DEST_ROOT.join('css')
-const JS_MAIN_DEST   = 'lib'
 const JS_RENDER_DEST = DEST_ROOT.join('js')
 
 let electronProcess = null
 
 gulp.task('clean', (done) => {
-  rimraf('{htdocs,lib}', done)
+  rimraf('{htdocs}', done)
 })
 
-gulp.task('build', (done) => runSequence('clean', ['build:main', 'build:render'], done))
-
-gulp.task('build:main', () => {
-  return gulp.src(JS_MAIN_SOURCES.toString())
-    .pipe(plug.plumber())
-    .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.init()))
-    .pipe(plug.uglify())
-    .pipe(plug.if(NODE_ENV !== 'production', plug.sourcemaps.write()))
-    .pipe(gulp.dest(JS_MAIN_DEST.toString()))
-})
+gulp.task('build', (done) => runSequence('clean', 'build:render', done))
 
 gulp.task('build:render', (done) => {
   runSequence(['build:render:ejs', 'build:render:scss', 'build:render:js'], done)
@@ -91,7 +81,7 @@ gulp.task('live:watch', (done) => {
 })
 
 gulp.task('live:electron:start', (done) => {
-  electronProcess = spawn(Electron, ['.'], { stdio: ['ignore', 1, 2] })
+  electronProcess = spawn(Electron, ['.', '--interactive'], { stdio: [0, 1, 2] })
   process.on('exit', () => electronProcess.kill())
   done()
 })

@@ -11,13 +11,21 @@
   <body>
     <div class="searchbar" id="searchbar">
       <i class="fa fa-search searchbar-icon"></i>
-      <input class="searchbar-input" id="searchbar-input" type="text" placeholder="Search"/>
+      <input class="searchbar-input"
+             id="searchbar-input"
+             v-model="query"
+             type="text"
+             placeholder="Search"/>
     </div>
 
-    <div class="searchresult">
-      <div class="searchresult-item">
+    <div class="searchresult" id="searchresult">
+      <div class="searchresult-item"
+           v-for="result in results"
+           ref="item"
+           draggable="true"
+           v-on:dragstart="startdrag(result)">
         <img class="thumbnail" alt="" src=""/>
-        <div class="pathname">/Volumes/SSD 2GO PKT/VJ Clips(HAP)/beeple/async.mov</div>
+        <div class="pathname">{{ result }}</div>
       </div>
     </div>
   </body>

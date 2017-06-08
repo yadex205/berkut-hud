@@ -81,7 +81,7 @@ gulp.task('live:watch', (done) => {
 })
 
 gulp.task('live:electron:start', (done) => {
-  electronProcess = spawn(Electron, ['.', '--interactive'], { stdio: [0, 1, 2] })
+  electronProcess = spawn(Electron, ['.', '--interactive'], { stdio: [0, 1, 2], env: process.env })
   process.on('exit', () => electronProcess.kill())
   done()
 })

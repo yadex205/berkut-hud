@@ -13,7 +13,9 @@
     "live": "gulp live",
     "start": "pm2 start gulp --name=\"berkut-hud-gulp\" -- live",
     "stop": "pm2 delete berkut-hud-gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "electron .",
+    "release": "gulp release"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "bower": "^1.8.0",
     "browser-sync": "^2.18.12",
     "electron": "^1.6.10",
+    "electron-packager": "^8.7.1",
     "electron-rebuild": "^1.5.11",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",

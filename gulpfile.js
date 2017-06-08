@@ -99,5 +99,5 @@ gulp.task('live:electron:stop', (done) => {
 })
 
 gulp.task('live:electron:restart', (done) => {
-  runSequence('live:electron:start', 'live:electron:stop', done)
+  runSequence('live:electron:stop', 'live:electron:start', done)
 })

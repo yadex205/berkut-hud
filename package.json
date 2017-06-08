@@ -2,13 +2,15 @@
   "name": "berkut-hud",
   "version": "0.0.0",
   "description": "A fast search solution for performers",
-  "main": "lib/hud.js",
+  "main": "lib/app.js",
   "engine": {
     "node": ">=7.0"
   },
   "scripts": {
+    "postinstall": "electron-rebuild",
     "build": "gulp build",
     "clean": "gulp clean",
+    "live": "gulp live",
     "start": "pm2 start gulp --name=\"berkut-hud-gulp\" -- live",
     "stop": "pm2 stop berkut-hud-gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +29,7 @@
   "devDependencies": {
     "browser-sync": "^2.18.12",
     "electron": "^1.6.10",
+    "electron-rebuild": "^1.5.11",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-ejs": "^3.0.1",

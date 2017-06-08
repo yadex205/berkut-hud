@@ -13,7 +13,7 @@ const SOURCE_ROOT       = new Pathname('src')
 const EJS_SOURCES       = SOURCE_ROOT.join('ejs/**/*.ejs')
 const SCSS_SOURCES      = SOURCE_ROOT.join('scss/**/*.scss')
 const JS_MAIN_SOURCES   = 'lib/**/*.js'
-const JS_RENDER_SOURCES = SOURCE_ROOT.join('js/render/**/*.js')
+const JS_RENDER_SOURCES = SOURCE_ROOT.join('js/**/*.js')
 
 const DEST_ROOT      = new Pathname('htdocs')
 const EJS_DEST       = DEST_ROOT

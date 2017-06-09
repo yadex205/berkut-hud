@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startdrag: function(filepath) {
         require('electron').remote.getCurrentWebContents().startDrag({
           file: filepath,
-          icon: '/Users/canon/Dropbox/DtAqeum_.jpg'
+          icon: window.App.root.join('resources/berkut.iconset/icon_32x32.png').toString()
         })
       }
 

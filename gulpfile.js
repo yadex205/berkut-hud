@@ -21,6 +21,8 @@ const SCSS_DEST      = DEST_ROOT.join('css')
 const JS_RENDER_DEST = DEST_ROOT.join('js')
 const VENDOR_DEST    = DEST_ROOT.join('vendor')
 
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
 let electronProcess = null
 
 gulp.task('clean', (done) => {
@@ -130,11 +132,16 @@ gulp.task('live:electron:restart', (done) => {
 })
 
 gulp.task('release', (done) => {
+  runSequence('build', 'release:package', done)
+})
+
+gulp.task('release:package', (done) => {
   packager({
     // common
     dir: '.',
     arch: 'x64',
     asar: true,
+    icon: 'resources/berkut.icns',
     ignore: [/\.nvmrc/, /gulpfile\.js/, /bower.*/, /src/, /.+\.md/, /LICENSE/ ],
     name: 'BERKUT HUD',
     out: 'dist',

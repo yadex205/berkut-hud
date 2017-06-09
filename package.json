@@ -15,7 +15,7 @@
     "stop": "pm2 delete berkut-hud-gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "electron .",
-    "release": "gulp release"
+    "release": "NODE_ENV=production gulp release"
   },
   "repository": {
     "type": "git",

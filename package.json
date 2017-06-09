@@ -1,6 +1,6 @@
 {
   "name": "berkut-hud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A fast search solution for performers",
   "main": "lib/app.js",
   "engine": {
@@ -15,7 +15,7 @@
     "stop": "pm2 delete berkut-hud-gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "electron .",
-    "release": "gulp release"
+    "release": "NODE_ENV=production gulp release"
   },
   "repository": {
     "type": "git",

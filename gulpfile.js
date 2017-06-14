@@ -1,5 +1,5 @@
-const gulp        = require('gulp')
 const plug        = require('gulp-load-plugins')()
+const async       = require('async')
 const browserSync = require('browser-sync').create()
 const Electron    = require('electron')
 const packager    = require('electron-packager')
@@ -7,6 +7,7 @@ const Pathname    = require('node-pathname')
 const rimraf      = require('rimraf')
 const runSequence = require('run-sequence')
 const spawn       = require('child_process').spawn
+const requireDir  = require('require-dir')
 
 const SOURCE_ROOT       = new Pathname('src')
 const EJS_SOURCES       = SOURCE_ROOT.join('ejs/**/*.ejs')
@@ -24,6 +25,9 @@ const VENDOR_DEST    = DEST_ROOT.join('vendor')
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
 let electronProcess = null
+
+require('./gulp/helper')
+requireDir('./gulp/tasks', { recursive: true })
 
 gulp.task('clean', (done) => {
   rimraf('htdocs', done)

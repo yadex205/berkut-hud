@@ -29,6 +29,7 @@
   "homepage": "https://github.com/yadex205/berkut-hud#readme",
   "private": true,
   "devDependencies": {
+    "async": "^2.4.1",
     "bower": "^1.8.0",
     "browser-sync": "^2.18.12",
     "electron": "^1.6.10",
@@ -45,6 +46,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "pm2": "^2.4.6",
+    "require-dir": "^0.3.2",
     "rimraf": "^2.6.1",
     "run-sequence": "^1.2.2"
   },

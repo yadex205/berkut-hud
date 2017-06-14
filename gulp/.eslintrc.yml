@@ -1,0 +1,4 @@
+globals:
+  gulp: true
+  browserSync: true
+  Node: true

@@ -4,7 +4,6 @@ const browserSync = require('browser-sync').create()
 const Electron    = require('electron')
 const packager    = require('electron-packager')
 const Pathname    = require('node-pathname')
-const rimraf      = require('rimraf')
 const runSequence = require('run-sequence')
 const spawn       = require('child_process').spawn
 const requireDir  = require('require-dir')
@@ -28,10 +27,6 @@ let electronProcess = null
 
 require('./gulp/helper')
 requireDir('./gulp/tasks', { recursive: true })
-
-gulp.task('clean', (done) => {
-  rimraf('htdocs', done)
-})
 
 gulp.task('build', (done) => runSequence('clean', 'build:render', done))
 

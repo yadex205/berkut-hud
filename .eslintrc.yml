@@ -10,6 +10,7 @@ rules:
       FunctionExpression:
         parameters: first
       ArrayExpression: first
+      ObjectExpression: first
   linebreak-style:
     - error
     - unix

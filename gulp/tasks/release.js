@@ -10,9 +10,18 @@ gulp.task('release:package', done => {
     // common
     dir: '.',
     arch: 'x64',
-    asar: true,
+    asar: false,
     icon: 'resources/berkut.icns',
-    ignore: [/\.nvmrc/, /gulpfile\.js/, /bower.*/, /src/, /.+\.md/, /LICENSE/ ],
+    ignore: [
+        /^\/\.nvmrc/,
+        /^\/gulp.*/,
+        /^\/bower.*/,
+        /^\/src.*/,
+        /^\/vendor.*/,
+        /^\/((?!\/).)+\.md/,
+        /^\/LICENSE/,
+
+    ],
     name: 'BERKUT HUD',
     out: 'dist',
     overwrite: true,

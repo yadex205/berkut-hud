@@ -1,11 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-  window.searchbar = new Vue({
+  new Vue({
     el: '#searchbar',
-    data: { query: '' },
+    data: {
+      query: '',
+      ipc: require('electron').ipcRenderer,
+      requestTimeoutID: null,
+    },
     watch: {
-      query: function(newVal) {
-        if (!newVal || !newVal.trim()) { return }
-        window.searchresult.search(newVal)
+      query: function(newVal, oldVal) {
+        [newVal, oldVal] = [newVal, oldVal].map(val => val.trim())
+        if (!newVal || newVal === oldVal) { return }
+
+        if (this.requestTimeoutID) { clearTimeout(this.requestTimeoutID) }
+        this.requestTimeoutID = setTimeout(() => {
+          this.requestTimeoutID = null
+          this.ipc.send('search:cancel')
+          this.ipc.send('search:request', newVal)
+        }, 100)
       }
     }
   })

@@ -1,28 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-  window.searchresult = new Vue({
+  new Vue({
     el: '#searchresult',
-    data: { results: [], searcher: null },
+    data: {
+      queryString: '',
+      results: [],
+      ipc: require('electron').ipcRenderer
+    },
     methods: {
-      search: function(query) {
-        if (this.searcher) { this.searcher.emit('stop') }
-        this.results = []
-        this.searcher = new window.Searcher(query).execute()
-        this.searcher.on('file', filepath => {
-          this.results.push(filepath)
-        })
-      },
       startdrag: function(filepath) {
         require('electron').remote.getCurrentWebContents().startDrag({
           file: filepath,
           icon: window.App.root.join('resources/berkut.iconset/icon_32x32.png').toString()
         })
       }
-
     },
     watch: {
       'results.length': function(length) {
-        if (length >= 1 && this.searcher) { this.searcher.emit('stop') }
+        if (length >= 1) { this.ipc.send('search:cancel') }
       },
     },
+    created: function() {
+      this.ipc.on('search:result', (_event, queryString, filepaths) => {
+        if (this.queryString !== queryString) {
+          this.results = filepaths
+        } else {
+          this.results.push.apply(filepaths)
+        }
+        this.queryString = queryString
+      })
+      this.ipc.on('search:finish', (_event, queryString) => {
+        if (this.queryString !== queryString) { this.results = [] }
+      })
+    }
   })
 })

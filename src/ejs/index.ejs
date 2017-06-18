@@ -20,11 +20,15 @@
 
     <div class="searchresult" id="searchresult">
       <div class="searchresult-item"
-           v-for="result in results"
+           v-for="result, index in results"
            ref="item"
            draggable="true"
            v-on:dragstart="startdrag(result)">
-        <img class="thumbnail" alt="" src=""/>
+        <div class="thumbnail-wrapper">
+          <img class="thumbnail" v-bind:alt="result"
+               v-bind:src="'data:image/png;base64,' + thumbnails[index]"
+               v-show="thumbnails[index]"/>
+        </div>
         <div class="pathname">{{ result }}</div>
       </div>
     </div>

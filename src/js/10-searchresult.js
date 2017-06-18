@@ -1,9 +1,12 @@
+/* global Vue */
+
 document.addEventListener('DOMContentLoaded', () => {
   new Vue({
     el: '#searchresult',
     data: {
       queryString: '',
       results: [],
+      thumbnails: new Array(100).fill(null),
       ipc: require('electron').ipcRenderer
     },
     methods: {
@@ -16,20 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     watch: {
       'results.length': function(length) {
-        if (length >= 1) { this.ipc.send('search:cancel') }
+        if (length >= 20) { this.ipc.send('search:cancel') }
       },
     },
     created: function() {
       this.ipc.on('search:result', (_event, queryString, filepaths) => {
         if (this.queryString !== queryString) {
-          this.results = filepaths
-        } else {
-          this.results.push.apply(filepaths)
+          this.results = []
+          this.thumbnails.fill('')
         }
+        filepaths.forEach(filepath => {
+          this.results.push(filepath)
+          this.ipc.send('thumbnail:request', filepath)
+        })
+
         this.queryString = queryString
       })
       this.ipc.on('search:finish', (_event, queryString) => {
-        if (this.queryString !== queryString) { this.results = [] }
+        if (this.queryString !== queryString) { this.results.splice(0, this.results.length) }
+      })
+      this.ipc.on('thumbnail:result', (_event, filepath, base64Image) => {
+        Vue.set(this.thumbnails, this.results.indexOf(filepath), base64Image)
       })
     }
   })

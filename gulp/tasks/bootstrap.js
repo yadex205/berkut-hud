@@ -6,7 +6,8 @@ const ffmpegRoot = vendorRoot.join('ffmpeg')
 
 const FFMPEG_CONFIGURE_OPTIONS = [
   `--prefix="${Node.root.toString()}`,
-  '--disable-ffplay', '--disable-ffserver', '--disable-doc', '--disable-encoders'
+  '--disable-ffplay', '--disable-ffserver', '--disable-doc', '--disable-encoders',
+  '--enable-encoder=mjpeg'
 ]
 
 gulp.task('bootstrap', done => {

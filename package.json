@@ -1,6 +1,6 @@
 {
   "name": "berkut-hud",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A fast search solution for performers",
   "main": "index.js",
   "engine": {
@@ -49,7 +49,9 @@
     "run-sequence": "^1.2.2"
   },
   "dependencies": {
+    "async": "^2.4.1",
     "lokijs": "^1.5.0",
-    "node-pathname": "^0.2.0"
+    "node-pathname": "^0.2.0",
+    "sax": "^1.2.2"
   }
 }

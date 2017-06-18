@@ -24,7 +24,11 @@
            ref="item"
            draggable="true"
            v-on:dragstart="startdrag(result)">
-        <img class="thumbnail" alt="" v-bind:src="'data:image/png;base64,' + thumbnails[index]"/>
+        <div class="thumbnail-wrapper">
+          <img class="thumbnail" v-bind:alt="result"
+               v-bind:src="'data:image/png;base64,' + thumbnails[index]"
+               v-show="thumbnails[index]"/>
+        </div>
         <div class="pathname">{{ result }}</div>
       </div>
     </div>

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     watch: {
       'results.length': function(length) {
-        if (length >= 1) { this.ipc.send('search:cancel') }
+        if (length >= 20) { this.ipc.send('search:cancel') }
       },
     },
     created: function() {
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       this.ipc.on('thumbnail:result', (_event, filepath, base64Image) => {
         Vue.set(this.thumbnails, this.results.indexOf(filepath), base64Image)
-        console.log(base64Image)
       })
     }
   })

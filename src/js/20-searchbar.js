@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.requestTimeoutID = null
           this.ipc.send('search:cancel')
           this.ipc.send('search:request', newVal)
-        }, 150)
+        }, 100)
       }
     }
   })

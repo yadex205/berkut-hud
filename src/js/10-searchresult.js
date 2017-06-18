@@ -20,8 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     },
     created: function() {
-      this.ipc.on('search:result', (_event, queryString, filepath) => {
-        this.queryString !== queryString ? (this.results = [filepath]) : this.results.push(filepath)
+      this.ipc.on('search:result', (_event, queryString, filepaths) => {
+        if (this.queryString !== queryString) {
+          this.results = filepaths
+        } else {
+          this.results.push.apply(filepaths)
+        }
         this.queryString = queryString
       })
       this.ipc.on('search:finish', (_event, queryString) => {

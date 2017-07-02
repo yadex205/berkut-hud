@@ -20,7 +20,7 @@ gulp.task('release:package', done => {
         /^\/vendor.*/,
         /^\/((?!\/).)+\.md/,
         /^\/LICENSE/,
-
+        /^bin\/.*/,
     ],
     name: 'BERKUT HUD',
     out: 'dist',
